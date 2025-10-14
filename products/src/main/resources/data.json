@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Smartwatch Pro X",
+    "description": "Water-resistant smartwatch with heart rate monitoring and GPS tracking.",
+    "price": 199.99,
+    "currency": "USD",
+    "availabilityStatus": "IN_STOCK",
+    "category": "Wearables",
+    "brand": "TimeTek"
+  },
+  {
+    "name": "4K Ultra HD TV",
+    "description": "55-inch 4K UHD Smart TV with HDR10 and integrated streaming apps.",
+    "price": 599.00,
+    "currency": "USD",
+    "availabilityStatus": "IN_STOCK",
+    "category": "Electronics",
+    "brand": "VisionTech"
+  },
+  {
+    "name": "Gaming Laptop G15",
+    "description": "15.6-inch laptop with Intel i7, 16GB RAM, RTX 4060, and 1TB SSD.",
+    "price": 1499.99,
+    "currency": "USD",
+    "availabilityStatus": "IN_STOCK",
+    "category": "Computers",
+    "brand": "PowerEdge"
+  },
+  {
+    "name": "Ergonomic Office Chair",
+    "description": "Adjustable lumbar support, breathable mesh back, and padded armrests.",
+    "price": 249.99,
+    "currency": "USD",
+    "availabilityStatus": "IN_STOCK",
+    "category": "Furniture",
+    "brand": "ErgoSeat"
+  },
+  {
+    "name": "Electric Toothbrush ProClean",
+    "description": "Rechargeable toothbrush with 5 brushing modes and 2-minute timer.",
+    "price": 89.99,
+    "currency": "USD",
+    "availabilityStatus": "IN_STOCK",
+    "category": "Health & Personal Care",
+    "brand": "SmileBright"
+  },
+  {
+    "name": "Portable Bluetooth Speaker",
+    "description": "Compact waterproof speaker with deep bass and 12h playtime.",
+    "price": 59.99,
+    "currency": "USD",
+    "availabilityStatus": "IN_STOCK",
+    "category": "Audio",
+    "brand": "WaveSound"
+  },
+  {
+    "name": "Air Purifier Home 3000",
+    "description": "HEPA filter air purifier for rooms up to 500 sq ft, removes 99.97% of particles.",
+    "price": 179.00,
+    "currency": "USD",
+    "availabilityStatus": "IN_STOCK",
+    "category": "Home Appliances",
+    "brand": "PureAir"
+  },
+  {
+    "name": "Smart LED Light Bulb",
+    "description": "Wi-Fi enabled bulb with voice control and adjustable color temperature.",
+    "price": 24.99,
+    "currency": "USD",
+    "availabilityStatus": "IN_STOCK",
+    "category": "Smart Home",
+    "brand": "LumaLight"
+  },
+  {
+    "name": "Stainless Steel Water Bottle",
+    "description": "Insulated bottle keeps drinks cold for 24h or hot for 12h.",
+    "price": 29.99,
+    "currency": "USD",
+    "availabilityStatus": "IN_STOCK",
+    "category": "Outdoors",
+    "brand": "HydroPeak"
+  },
+  {
+    "name": "Wireless Mechanical Keyboard",
+    "description": "RGB backlit keyboard with blue switches and rechargeable battery.",
+    "price": 119.99,
+    "currency": "USD",
+    "availabilityStatus": "IN_STOCK",
+    "category": "Accessories",
+    "brand": "KeyWave"
+  }
+]
