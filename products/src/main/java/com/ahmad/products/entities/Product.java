@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 @Builder
 @Getter
 @Setter
+@Data
 @Entity
 @Table(name = "products")
 public class Product extends Auditable {

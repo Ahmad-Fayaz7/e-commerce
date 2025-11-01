@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-// Comment this annotation temporarily for testing repository
+// Comment this annotation temporarily for testing
 @EnableJpaAuditing(auditorAwareRef = "auditorProvider")
 @OpenAPIDefinition(
         info = @Info(
