@@ -1,14 +1,20 @@
 package com.ahmad.carts.entities;
 
+import com.ahmad.carts.audit.Auditable;
 import com.ahmad.carts.entities.enums.Currency;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
-
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString(callSuper = true)
+@Getter
+@Setter
 @Entity
 @Table(name = "carts")
-public class Cart {
+public class Cart extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,6 +27,14 @@ public class Cart {
     @Column(name = "currency")
     @Enumerated(EnumType.STRING)
     private Currency currency;
-    @OneToMany(mappedBy = "cartId")
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<CartItem> items;
+
+    public void addToCart(CartItem item) {
+        items.add(item);
+        item.setCart(this);
+    }
+
+
 }
