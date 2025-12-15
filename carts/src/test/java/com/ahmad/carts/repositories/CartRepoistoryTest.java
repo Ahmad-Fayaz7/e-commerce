@@ -29,30 +29,42 @@ public class CartRepoistoryTest {
     @Test
     public void shouldCreateCart() {
         // Given: a cart saved in the repository
-        var saved = cartRepository.save(cart);
+        var savedCart = cartRepository.save(cart);
 
         // when: cart is retrieved
-        Optional<Cart> found = cartRepository.findById(saved.getId());
+        Optional<Cart> cartById = cartRepository.findById(savedCart.getId());
 
         // then
-        assertTrue(found.isPresent());
-        assertEquals(saved.getId(), found.get().getId());
-        assertEquals(Currency.USD, found.get().getCurrency());
-        assertEquals(saved.getTotalItems(), found.get().getTotalItems());
+        assertTrue(cartById.isPresent());
+        assertEquals(savedCart .getId(), cartById.get().getId());
+        assertEquals(Currency.USD, cartById.get().getCurrency());
+        assertEquals(savedCart .getTotalItems(), cartById.get().getTotalItems());
     }
 
     @Test
     void shouldDeleteCart() {
         // Given: a cart saved in the repository
-        var saved = cartRepository.save(cart);
-        System.out.println(saved);
-        assertTrue(cartRepository.findById(saved.getId()).isPresent());
+        var savedCart = cartRepository.save(cart);
+        assertTrue(cartRepository.findById(savedCart.getId()).isPresent());
 
         // When: the cart is deleted by its ID
-        cartRepository.deleteById(saved.getId());
+        cartRepository.deleteById(savedCart.getId());
 
         // Then: the cart should no longer be present in the repository
-        assertFalse(cartRepository.findById(saved.getId()).isPresent());
+        assertFalse(cartRepository.findById(savedCart.getId()).isPresent());
+    }
+
+    @Test
+    void shouldFindByUserId() {
+        // given
+        var savedCart = cartRepository.save(cart);
+        assertTrue(cartRepository.findById(savedCart.getId()).isPresent());
+
+        // when
+        var cartByUserId = cartRepository.findByUserId(cart.getUserId());
+
+        // then
+        assertTrue(cartByUserId .isPresent());
     }
 
 
