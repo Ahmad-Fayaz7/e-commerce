@@ -16,7 +16,7 @@ import java.math.BigDecimal;
 public class CartItem extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long itemId;
     @ManyToOne
     @JoinColumn(name = "cart_id")
     private Cart cart;

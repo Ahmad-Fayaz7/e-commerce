@@ -1,5 +1,6 @@
-package com.ahmad.carts.dtos;
+package com.ahmad.carts.mapper;
 
+import com.ahmad.carts.dtos.CartItemDto;
 import com.ahmad.carts.entities.CartItem;
 import org.mapstruct.Mapper;
 

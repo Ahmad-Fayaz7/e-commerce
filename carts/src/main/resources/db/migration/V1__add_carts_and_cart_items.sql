@@ -20,6 +20,10 @@ create table cart_items
     product_id          bigint,
     quantity            int not null,
     price               decimal(10, 2),
+    created_at          datetime not null,
+    created_by          varchar(255) not null,
+    updated_at          datetime null,
+    updated_by          varchar(255) null,
     constraint cart_items_pk
         primary key (item_id),
     foreign key (cart_id) references carts(cart_id)
