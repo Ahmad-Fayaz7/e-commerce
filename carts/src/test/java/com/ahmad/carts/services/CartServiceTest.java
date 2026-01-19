@@ -1,13 +1,13 @@
 package com.ahmad.carts.services;
 
 import com.ahmad.carts.dtos.CartItemDto;
-import com.ahmad.carts.dtos.ICartItemMapper;
+import com.ahmad.carts.mapper.ICartItemMapper;
 import com.ahmad.carts.entities.Cart;
 import com.ahmad.carts.entities.CartItem;
 import com.ahmad.carts.entities.enums.Currency;
-import com.ahmad.carts.repositories.ICartItemRepository;
 import com.ahmad.carts.repositories.ICartRepository;
 import com.ahmad.carts.services.impl.CartServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,9 +15,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -27,20 +27,23 @@ public class CartServiceTest {
     @Mock
     private ICartRepository cartRepository;
     @Mock
-    private ICartItemRepository cartItemRepository;
-    @Mock
     private ICartItemMapper cartItemMapper;
     @InjectMocks
     private CartServiceImpl cartService;
     private final Long USER_ID = 1L;
+    private CartItemDto cartItemDto;
+    private CartItem cartItem;
+    private Cart cart;
+
+    @BeforeEach
+    void setup() {
+        cartItemDto = createCartItemDto();
+        cartItem = createCartItem();
+        cart = createCart();
+    }
 
     @Test
-    void shouldAddToCart() {
-        // given
-        var cartItemDto = createCartItemDto();
-        var cartItem = createCartItem();
-        var cart = createCart();
-
+    void shouldAddItemToCart() {
         // when
         when(cartRepository.findByUserId(USER_ID)).thenReturn(Optional.of(cart));
         when(cartItemMapper.toEntity(cartItemDto)).thenReturn(cartItem);
@@ -54,9 +57,17 @@ public class CartServiceTest {
 
     @Test
     void shouldRemoveItemFromCart() {
-        var cartItem = createCartItem();
-        cartService.removeItemFromCart(cartItem.getId());
-        verify(cartItemRepository).deleteById(cartItem.getId());
+        // given
+        cart.addItemToCart(cartItem);
+
+        // when
+        when(cartRepository.findByUserId(USER_ID)).thenReturn(Optional.of(cart));
+        cartService.removeItemFromCart(USER_ID, cartItemDto);
+
+        // then
+        verify(cartRepository).findByUserId(USER_ID);
+        assertThat(cart.getItems()).doesNotContain(cartItem);
+        verify(cartRepository).save(cart);
     }
 
     private CartItemDto createCartItemDto() {
@@ -69,14 +80,7 @@ public class CartServiceTest {
     }
 
     private Cart createCart() {
-        var cart = new Cart();
-        cart.setUserId(USER_ID);
-        cart.setItems(new ArrayList<>());
-        cart.setCurrency(Currency.USD);
-        cart.setTotalItems(5);
-        cart.setTotalPrice(new BigDecimal(160));
-
-        return cart;
+        return Cart.builder().userId(USER_ID).currency(Currency.USD).build();
     }
 
 }
