@@ -1,10 +1,12 @@
 package com.ahmad.carts.services;
 
+import com.ahmad.carts.dtos.CartDto;
 import com.ahmad.carts.dtos.CartItemDto;
 import com.ahmad.carts.mapper.ICartItemMapper;
 import com.ahmad.carts.entities.Cart;
 import com.ahmad.carts.entities.CartItem;
 import com.ahmad.carts.entities.enums.Currency;
+import com.ahmad.carts.mapper.ICartMapper;
 import com.ahmad.carts.repositories.ICartRepository;
 import com.ahmad.carts.services.impl.CartServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,18 +30,22 @@ public class CartServiceTest {
     private ICartRepository cartRepository;
     @Mock
     private ICartItemMapper cartItemMapper;
+    @Mock
+    private ICartMapper cartMapper;
     @InjectMocks
     private CartServiceImpl cartService;
     private final Long USER_ID = 1L;
     private CartItemDto cartItemDto;
     private CartItem cartItem;
     private Cart cart;
+    private CartDto cartDto;
 
     @BeforeEach
     void setup() {
         cartItemDto = createCartItemDto();
         cartItem = createCartItem();
         cart = createCart();
+        cartDto = createCartDto();
     }
 
     @Test
@@ -47,6 +53,7 @@ public class CartServiceTest {
         // when
         when(cartRepository.findByUserId(USER_ID)).thenReturn(Optional.of(cart));
         when(cartItemMapper.toEntity(cartItemDto)).thenReturn(cartItem);
+        when(cartMapper.toDto(cart)).thenReturn(cartDto);
         when(cartRepository.save(any(Cart.class))).thenReturn(cart);
         cartService.addItemToCart(USER_ID,cartItemDto);
 
@@ -61,11 +68,11 @@ public class CartServiceTest {
         cart.addItemToCart(cartItem);
 
         // when
-        when(cartRepository.findByUserId(USER_ID)).thenReturn(Optional.of(cart));
-        cartService.removeItemFromCart(USER_ID, cartItemDto);
+        when(cartRepository.findById(cart.getCartId())).thenReturn(Optional.of(cart));
+        cartService.removeItemFromCart(cart.getCartId(), cartItemDto.getProductId());
 
         // then
-        verify(cartRepository).findByUserId(USER_ID);
+        verify(cartRepository).findById(cart.getCartId());
         assertThat(cart.getItems()).doesNotContain(cartItem);
         verify(cartRepository).save(cart);
     }
@@ -82,5 +89,9 @@ public class CartServiceTest {
     private Cart createCart() {
         return Cart.builder().userId(USER_ID).currency(Currency.USD).build();
     }
-
+    private CartDto createCartDto() {
+        CartDto cartDto = new CartDto();
+        cartDto.setCurrency(Currency.USD);
+        return cartDto;
+    }
 }
