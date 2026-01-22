@@ -2,7 +2,7 @@ package com.ahmad.carts.services.impl;
 
 import com.ahmad.carts.dtos.CartDto;
 import com.ahmad.carts.dtos.CartItemDto;
-import com.ahmad.carts.exceptions.CartNotFoundException;
+import com.ahmad.carts.exceptions.ResourceNotFoundException;
 import com.ahmad.carts.mapper.ICartItemMapper;
 import com.ahmad.carts.entities.Cart;
 import com.ahmad.carts.entities.enums.Currency;
@@ -43,7 +43,7 @@ public class CartServiceImpl implements ICartService {
     @Override
     public CartDto removeItemFromCart(Long cartId, Long productId) {
         var cart = cartRepository.findById(cartId)
-                .orElseThrow(() -> new CartNotFoundException("Cart not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Cart", "ID", String.valueOf(cartId)));
         // delete item
         cart.removeItemByProductId(productId);
         return cartMapper.toDto(cartRepository.save(cart));
@@ -51,20 +51,20 @@ public class CartServiceImpl implements ICartService {
     @Override
     public CartDto updateItemQuantity(Long cartId, Long productId, int quantity) {
         var cart = cartRepository.findById(cartId)
-                .orElseThrow(() -> new CartNotFoundException("Cart not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("Cart", "ID", String.valueOf(cartId)));
         cart.updateQuantity(productId, quantity);
         return cartMapper.toDto(cartRepository.save(cart));
     }
 
     @Override
     public CartDto getCart(Long cartId) {
-        var cart = cartRepository.findById(cartId).orElseThrow(() -> new CartNotFoundException("Cart not found"));
+        var cart = cartRepository.findById(cartId).orElseThrow(() -> new ResourceNotFoundException("Cart", "ID", String.valueOf(cartId)));
         return cartMapper.toDto(cart);
     }
 
     @Override
     public void deleteCart(Long cartId) {
-        var cart = cartRepository.findById(cartId).orElseThrow(() -> new CartNotFoundException("Cart not found"));
+        var cart = cartRepository.findById(cartId).orElseThrow(() -> new ResourceNotFoundException("Cart", "ID", String.valueOf(cartId)));
         cartRepository.deleteById(cart.getCartId());
     }
 

@@ -2,7 +2,7 @@ package com.ahmad.carts.entities;
 
 import com.ahmad.carts.audit.Auditable;
 import com.ahmad.carts.entities.enums.Currency;
-import com.ahmad.carts.exceptions.CartItemNotFoundException;
+import com.ahmad.carts.exceptions.ResourceNotFoundException;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -56,14 +56,14 @@ public class Cart extends Auditable {
         }
         var item = getItemByProductId(productId);
         if (item.isEmpty())
-            throw new CartItemNotFoundException("Item not found");
+            throw new ResourceNotFoundException("Cart Item", "productId", String.valueOf(productId));
         item.get().setQuantity(quantity);
         calculateTotals();
     }
 
     public void removeItemByProductId(Long productId) {
         var item =
-                items.stream().filter(i -> i.getProductId().equals(productId)).findFirst().orElseThrow(() -> new CartItemNotFoundException("Item does not exist in cart"));
+                items.stream().filter(i -> i.getProductId().equals(productId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("CartItem", "productId", String.valueOf(productId)));
         items.remove(item);
         calculateTotals();
     }
