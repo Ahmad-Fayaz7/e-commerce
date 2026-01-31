@@ -93,7 +93,7 @@ public class CartController {
     @DeleteMapping("/{cartId}/items/{productId}")
     ResponseEntity<CartDto> removeItemFromCart(@PathVariable Long cartId, @PathVariable Long productId) {
     var cartDto = cartService.removeItemFromCart(cartId, productId);
-    return ResponseEntity.status(HttpStatus.NO_CONTENT).body(cartDto);
+    return ResponseEntity.status(HttpStatus.OK).body(cartDto);
     }
     @Operation(
             summary = "Delete cart",
