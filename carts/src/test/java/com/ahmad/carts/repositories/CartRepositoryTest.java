@@ -1,18 +1,22 @@
 package com.ahmad.carts.repositories;
 
+import com.ahmad.carts.config.JpaAuditingConfig;
 import com.ahmad.carts.entities.Cart;
 import com.ahmad.carts.entities.enums.Currency;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+@DataJpaTest
+@Import(JpaAuditingConfig.class)
 @ActiveProfiles("test")
 public class CartRepositoryTest {
     @Autowired
