@@ -1,6 +1,7 @@
 package com.ahmad.products.repositories;
 
 
+import com.ahmad.products.config.JpaAuditingConfig;
 import com.ahmad.products.entities.Product;
 import com.ahmad.products.entities.enums.AvailabilityStatus;
 import com.ahmad.products.entities.enums.Currency;
@@ -9,14 +10,14 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
-/* COMMENT @EnableJpaAuditing(auditorAwareRef = "auditorProvider")
-ON APPLICATION TEMPORARILY BEFORE RUNNING TESTS*/
 @DataJpaTest
+@Import(JpaAuditingConfig.class)
 @ActiveProfiles("test") // Automatically loads application-test.yml
 class ProductRepositoryTest {
 
