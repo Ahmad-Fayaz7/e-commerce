@@ -10,8 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-// Comment this annotation temporarily for testing
-@EnableJpaAuditing(auditorAwareRef = "auditorProvider")
 @OpenAPIDefinition(
         info = @Info(
                 title = "Products microservice documentation",
@@ -36,19 +34,6 @@ public class ProductsApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ProductsApplication.class, args);
-//        Product product = new Product(1L, "iphone", "decription", new BigDecimal("12.00"), Currency.EUR, AvailabilityStatus.IN_STOCK, "electronics", "apple");
-//        var p2 = Product.builder()
-//                .id(2L)
-//                .description("some text")
-//                .name("macbook")
-//                .currency(Currency.EUR)
-//                .availabilityStatus(AvailabilityStatus.IN_STOCK)
-//                .price(BigDecimal.valueOf(1400))
-//                .brand("apple")
-//                .category("electronics")
-//                .build();
-//        System.out.println(p2);
-
     }
 
 }
