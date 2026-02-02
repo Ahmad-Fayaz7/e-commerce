@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: "carts"
+
+  jpa:
+    database: mysql
+    show-sql: true
+
+  datasource:
+    username: root
+    password: afghanturk
+    url: jdbc:mysql://localhost:3306/carts

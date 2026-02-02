@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 // Comment this annotation temporarily for testing
-@EnableJpaAuditing(auditorAwareRef = "auditorProvider")
+//@EnableJpaAuditing(auditorAwareRef = "auditorProvider")
 @OpenAPIDefinition(
         info = @Info(
                 title = "Products microservice documentation",

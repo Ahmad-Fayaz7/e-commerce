@@ -8,14 +8,12 @@ import com.ahmad.products.exception.ProductAlreadyExistsException;
 import com.ahmad.products.exception.ResourceNotFoundException;
 import com.ahmad.products.mappers.IProductMapper;
 import com.ahmad.products.repositories.IProductRepository;
-import com.ahmad.products.repositories.impl.ProductRepositoryImpl;
 import com.ahmad.products.services.impl.ProductServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.math.BigDecimal;
 import java.util.Optional;
 
