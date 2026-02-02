@@ -41,8 +41,6 @@ public class ProductControllerTest {
     IProductService productService;
     @MockitoBean
     IProductMapper productMapper;
-    @InjectMocks
-    ProductController productController;
     private Product product;
     private ProductDto productDto;
 
